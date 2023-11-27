@@ -1,0 +1,22 @@
+.header-container {
+  min-width: 24.8rem;
+  min-height: 5.56rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-shrink: 0;
+  /* border: 1px solid lightskyblue; */
+}
+
+.header-container h1 {
+  font-size: 3rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
+.header-container p {
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
