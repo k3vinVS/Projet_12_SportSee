@@ -78,7 +78,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 8.63rem;
+  height: 7.63rem;
+  transform: rotate(-90deg);
 }
 
 .text-container p {
@@ -87,6 +88,5 @@
   font-size: 0.75rem;
   font-weight: 500;
   line-height: 1.5rem;
-  transform: rotate(-90deg);
   margin: 0 10.25rem;
 }

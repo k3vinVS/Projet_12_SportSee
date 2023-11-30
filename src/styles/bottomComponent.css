@@ -3,13 +3,13 @@
   /* max-width: 16.1rem; */
   height: 8rem;
   /* max-height: 16.4rem; */
-  padding: 1.5rem;
+  /* padding: 1.5rem; */
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   border-radius: 0.31rem;
   color: white;
-  background: #282d30;
+  background: red;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.02);
   flex-shrink: 0;
   overflow: hidden;
