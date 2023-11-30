@@ -2,10 +2,14 @@ import React from "react";
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from "recharts";
 
 const LineChartsGraph = ({ data }) => {
+  const objectif1 = data.USER_AVERAGE_SESSIONS[0].sessions; // PREMIER USER
+  // const objectif2 = data.USER_AVERAGE_SESSIONS[1].sessions; // DEUXIEME USER
+
   const daysOfWeek = ["L", "M", "M", "J", "V", "S", "D"];
   const formatXAxis = (tickItem) => {
     return daysOfWeek[tickItem];
   };
+
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
@@ -32,7 +36,7 @@ const LineChartsGraph = ({ data }) => {
 
   return (
     <ResponsiveContainer width="100%" height="100%" fill="red">
-      <LineChart width={500} height={300} data={data}>
+      <LineChart width={500} height={300} data={objectif1}>
         <XAxis
           tickFormatter={formatXAxis}
           stroke=""

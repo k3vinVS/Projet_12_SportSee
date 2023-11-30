@@ -8,21 +8,14 @@ import data from "../mocks/dataMock";
 import "../styles/home.css";
 import "../styles/bottomComponent.css";
 // import SimpleBarChartsGraph from "../components/graph/simpleBarGraph/SimpleBarChartsGraph";
-// import RadarChartsGraph from "../components/graph/radarGraph/RadarChartsGraph";
+import RadarChartsGraph from "../components/graph/radarGraph/RadarChartsGraph";
 // import RadialBarChartsGraph from "../components/graph/radialBarGraph/RadialBarChartsGraph";
 // import { useFetch } from "../utils/hooks";
 // import { useParams } from "react-router";
-// import BottomComponent from "../components/BottomComponent";
 
 const Home = () => {
-  const objectif1 = data.USER_AVERAGE_SESSIONS[0].sessions; // PREMIER USER
-  // const objectif2 = data.USER_AVERAGE_SESSIONS[1].sessions; // DEUXIEME USER
-
   // const kpi1 = data.USER_MAIN_DATA[0]; // PREMIER USER
   // const kpi2 = data.USER_MAIN_DATA[1]; // DEUXIEME USER
-
-  // const radar1 = data.USER_PERFORMANCE[0].data; // PREMIER USER
-  // const radar2 = data.USER_PERFORMANCE[1].data; // DEUXIEME USER
 
   // console.log(objectif1);
 
@@ -36,16 +29,26 @@ const Home = () => {
             <div className="data-top">
               <Poids data={data} />
             </div>
-            <div className="bottomComponent-container">
-              <LineChartsGraph data={objectif1} />
+            <div className="data-bottom">
+              <div
+                className="bottomComponent-container"
+                style={{ backgroundColor: "red" }}
+              >
+                <LineChartsGraph data={data} />
+              </div>
+              <div
+                className="bottomComponent-container"
+                style={{ backgroundColor: "#282D30" }}
+              >
+                <RadarChartsGraph data={data} />
+              </div>
+              <div
+                className="bottomComponent-container"
+                style={{ backgroundColor: "#FBFBFB" }}
+              >
+                {/* <RadialBarChartsGraph data={kpi1} /> */}
+              </div>
             </div>
-            {/* <RadialBarChartsGraph data={kpi1} /> */}
-            {/* <RadarChartsGraph data={radar1} /> */}
-            {/* <div className="data-bottom">
-              <BottomComponent />
-              <BottomComponent />
-              <BottomComponent />
-            </div> */}
           </div>
           <div className="data-container_right">
             <div className="data-right">
