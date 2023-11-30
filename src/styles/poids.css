@@ -8,13 +8,14 @@
   /* display: flex;
   justify-content: center;
   align-items: center; */
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
 }
 
 .header {
   max-width: 52.2rem;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 3rem;
 }
 
 .header p {

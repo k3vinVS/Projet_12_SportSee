@@ -1,9 +1,12 @@
 import React from "react";
 import redPoint from "../assets/red-point.png";
 import blackPoint from "../assets/black-point.png";
+import SimpleBarChartsGraph from "../components/graph/simpleBarGraph/SimpleBarChartsGraph";
 import "../styles/poids.css";
 
-const Poids = () => {
+const Poids = ({ data }) => {
+  const activity1 = data.USER_ACTIVITY[0].sessions; // PREMIER USER
+  // const activity2 = data.USER_ACTIVITY[1].sessions; // DEUXIEME USER
   return (
     <div className="poids-container">
       <div className="header">
@@ -19,6 +22,7 @@ const Poids = () => {
           </span>
         </div>
       </div>
+      <SimpleBarChartsGraph data={activity1} />
     </div>
   );
 };
