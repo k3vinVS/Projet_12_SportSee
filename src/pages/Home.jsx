@@ -13,7 +13,6 @@ import carbsIcon from "../assets/carbs-icon.png";
 import fatIcon from "../assets/fat-icon.png";
 import "../styles/home.css";
 import "../styles/bottomComponent.css";
-// import SimpleBarChartsGraph from "../components/graph/simpleBarGraph/SimpleBarChartsGraph";
 // import { useFetch } from "../utils/hooks";
 // import { useParams } from "react-router";
 
@@ -57,21 +56,25 @@ const Home = () => {
                 data={data}
                 content={data.USER_MAIN_DATA[0].keyData.calorieCount}
                 icone={calorieIcon}
+                description={"Calories"}
               />
               <AsideComponent
                 data={data}
                 content={data.USER_MAIN_DATA[0].keyData.proteinCount}
                 icone={proteinIcon}
+                description={"Proteines"}
               />
               <AsideComponent
                 data={data}
                 content={data.USER_MAIN_DATA[0].keyData.carbohydrateCount}
                 icone={carbsIcon}
+                description={"Glucides"}
               />
               <AsideComponent
                 data={data}
                 content={data.USER_MAIN_DATA[0].keyData.lipidCount}
                 icone={fatIcon}
+                description={"Lipides"}
               />
             </div>
           </div>
