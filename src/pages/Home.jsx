@@ -3,20 +3,21 @@ import Liens from "../components/Liens";
 import Header from "../components/Header";
 import Poids from "../components/Poids";
 import LineChartsGraph from "../components/graph/lineGraph/LineChartsGraph";
+import RadarChartsGraph from "../components/graph/radarGraph/RadarChartsGraph";
+import RadialBarChartsGraph from "../components/graph/radialBarGraph/RadialBarChartsGraph";
 import AsideComponent from "../components/AsideComponent";
 import data from "../mocks/dataMock";
+import calorieIcon from "../assets/calories-icon.png";
+import proteinIcon from "../assets/protein-icon.png";
+import carbsIcon from "../assets/carbs-icon.png";
+import fatIcon from "../assets/fat-icon.png";
 import "../styles/home.css";
 import "../styles/bottomComponent.css";
 // import SimpleBarChartsGraph from "../components/graph/simpleBarGraph/SimpleBarChartsGraph";
-import RadarChartsGraph from "../components/graph/radarGraph/RadarChartsGraph";
-// import RadialBarChartsGraph from "../components/graph/radialBarGraph/RadialBarChartsGraph";
 // import { useFetch } from "../utils/hooks";
 // import { useParams } from "react-router";
 
 const Home = () => {
-  // const kpi1 = data.USER_MAIN_DATA[0]; // PREMIER USER
-  // const kpi2 = data.USER_MAIN_DATA[1]; // DEUXIEME USER
-
   // console.log(objectif1);
 
   return (
@@ -46,16 +47,32 @@ const Home = () => {
                 className="bottomComponent-container"
                 style={{ backgroundColor: "#FBFBFB" }}
               >
-                {/* <RadialBarChartsGraph data={kpi1} /> */}
+                <RadialBarChartsGraph data={data} />
               </div>
             </div>
           </div>
           <div className="data-container_right">
             <div className="data-right">
-              <AsideComponent />
-              <AsideComponent />
-              <AsideComponent />
-              <AsideComponent />
+              <AsideComponent
+                data={data}
+                content={data.USER_MAIN_DATA[0].keyData.calorieCount}
+                icone={calorieIcon}
+              />
+              <AsideComponent
+                data={data}
+                content={data.USER_MAIN_DATA[0].keyData.proteinCount}
+                icone={proteinIcon}
+              />
+              <AsideComponent
+                data={data}
+                content={data.USER_MAIN_DATA[0].keyData.carbohydrateCount}
+                icone={carbsIcon}
+              />
+              <AsideComponent
+                data={data}
+                content={data.USER_MAIN_DATA[0].keyData.lipidCount}
+                icone={fatIcon}
+              />
             </div>
           </div>
         </div>
