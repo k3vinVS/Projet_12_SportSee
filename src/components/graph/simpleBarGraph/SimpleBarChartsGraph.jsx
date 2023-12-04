@@ -14,10 +14,39 @@ const SimpleBarChartsGraph = ({ data }) => {
     return formatDay + 1;
   };
 
+  const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div
+          className="custom-tooltip"
+          style={{
+            width: 39,
+            height: 63,
+            background: "#E60000",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-evenly",
+            alignItems: "center",
+          }}
+        >
+          <p
+            className="label"
+            style={{ color: "white", fontSize: 7 }}
+          >{`${payload[0].value} kg`}</p>
+          <p
+            className="label"
+            style={{ color: "white", fontSize: 7 }}
+          >{`${payload[1].value} Kcal`}</p>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
     <ResponsiveContainer width="100%" height="70%">
       <BarChart width={500} height={300} data={data} barGap="10">
-        <Tooltip />
+        <Tooltip content={CustomTooltip} />
         <CartesianGrid strokeDasharray="3" vertical={false} />
         <XAxis
           tickLine={false}
@@ -34,7 +63,6 @@ const SimpleBarChartsGraph = ({ data }) => {
           // tickLine={false}
           // tickFormatter={false}
         />
-        <Tooltip />
         <Bar
           dataKey="kilogram"
           fill="black"

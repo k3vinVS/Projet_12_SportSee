@@ -4,28 +4,32 @@ import {
   RadialBar,
   ResponsiveContainer,
   Legend,
+  PolarAngleAxis,
 } from "recharts";
 
-const RadialBarChartsGraph = () => {
-  // const kpi1 = data.USER_MAIN_DATA[0].todayScore; // PREMIER USER
+const RadialBarChartsGraph = ({ data }) => {
+  const kpi1 = data.USER_MAIN_DATA; // PREMIER USER
   // const kpi2 = data.USER_MAIN_DATA[1]; // DEUXIEME USER
+  // const pourcentage = `${kpi1[0].todayScore * 100}`;
 
-  const data = [
-    {
-      name: "12",
-      uv: 31.47,
-      pv: 2400,
-      fill: "#8884d8",
-    },
-  ];
+  // console.log(kpi1);
+  // console.log(pourcentage);
+
+  // const dataExemple = [
+  //   {
+  //     name: "12",
+  //     uv: 31.47,
+  //     pv: 2400,
+  //     fill: "#8884d8",
+  //   },
+  // ];
+  // console.log(dataExemple);
 
   const style = {
-    top: "60%",
+    top: "75%",
     right: 8,
-    transform: "translate(0, -10%)",
     lineHeight: "15px",
-    color: "black",
-    fontSize: "0.94rem",
+    fontSize: "0.9rem",
   };
 
   // Convertir les "todayScore" en pourcentage ---
@@ -43,41 +47,32 @@ const RadialBarChartsGraph = () => {
       </span>
       <RadialBarChart
         startAngle={210}
-        endAngle={70}
-        // endAngle={-30}
+        endAngle={-30}
         cx="50%"
         cy="70%"
-        innerRadius="90%"
-        // outerRadius="80%"
-        barSize={10}
-        data={data}
-        label={{ fill: "red" }}
+        innerRadius="80%"
+        barSize={5}
+        data={kpi1}
       >
+        <PolarAngleAxis type="number" domain={[0, 1]} tick={false} />
         <RadialBar
-          minAngle={0}
-          // clockWise
-          // background
+          minAngle={90}
+          clockWise
+          background
           cornerRadius={5}
-          dataKey="uv"
+          dataKey="todayScore"
           style={{ fill: "red" }}
-          allowDataOverFlow={true}
-          domain={[0, 100]}
+          label={{ fill: "#282D30", position: "center", fontSize: "0.8rem" }}
         />
         <Legend
           iconSize={0}
           width={100}
-          height={40}
+          height={4}
           layout="horizontal"
-          verticalAlign="center"
+          verticalAlign="middle"
           align="center"
           wrapperStyle={style}
-          payload={[
-            {
-              value: "12%", // A REMPLACER -----
-              color: "#282D30",
-            },
-            { value: "de votre objectif", color: "#74798C" },
-          ]}
+          payload={[{ value: "de votre objectif", color: "#74798C" }]}
         />
       </RadialBarChart>
     </ResponsiveContainer>

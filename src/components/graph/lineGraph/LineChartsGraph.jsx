@@ -43,7 +43,7 @@ const LineChartsGraph = ({ data }) => {
           tickMargin={15}
           tick={{ fill: "#fff", fontSize: "12" }}
         />
-        <Tooltip contentStyle={{ fontSize: 8 }} content={<CustomTooltip />} />
+        <Tooltip content={<CustomTooltip />} />
         <Line
           type="natural"
           dataKey="sessionLength"
