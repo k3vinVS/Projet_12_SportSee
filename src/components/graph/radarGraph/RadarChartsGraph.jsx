@@ -6,11 +6,14 @@ import {
   PolarAngleAxis,
   ResponsiveContainer,
 } from "recharts";
+// import dataUser from "../../../mocks/dataMock";
+import { dataPerformanceFormat } from "../../../utils/modelizeData/userPerfModelize";
 
-const RadarChartsGraph = ({ dataUser }) => {
-  console.log(dataUser.activity);
-  // const user = dataUser.map((data) => data.kind);
-  // console.log(user);
+const RadarChartsGraph = ({ data }) => {
+  // console.log(dataPerformanceFormat(data));
+
+  const user = dataPerformanceFormat(data.USER_PERFORMANCE[0].data);
+  console.log(user);
   // const radar1 = data.USER_PERFORMANCE[0]; // PREMIER USER
   // const radar2 = data.USER_PERFORMANCE[1].data; // DEUXIEME USER
 
@@ -20,7 +23,7 @@ const RadarChartsGraph = ({ dataUser }) => {
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <RadarChart cx="50%" cy="50%" outerRadius="60%" data={dataUser}>
+      <RadarChart cx="50%" cy="50%" outerRadius="49%" data={user}>
         <PolarGrid radialLines={false} />
         <PolarAngleAxis
           dataKey="activity"
