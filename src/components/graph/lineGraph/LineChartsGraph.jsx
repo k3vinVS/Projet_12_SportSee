@@ -35,7 +35,7 @@ const LineChartsGraph = ({ data }) => {
   };
 
   return (
-    <ResponsiveContainer width="100%" height="100%" fill="red">
+    <ResponsiveContainer width="100%" height="100%">
       <LineChart width={500} height={300} data={objectif1}>
         <XAxis
           tickFormatter={formatXAxis}
@@ -43,9 +43,16 @@ const LineChartsGraph = ({ data }) => {
           tickMargin={15}
           tick={{ fill: "#fff", fontSize: "12" }}
         />
-        <Tooltip content={<CustomTooltip />} />
+        <Tooltip
+          content={<CustomTooltip />}
+          cursor={{
+            stroke: "grey",
+            strokeWidth: 20,
+            opacity: 0.3,
+          }}
+        />
         <Line
-          type="natural"
+          type="monotone"
           dataKey="sessionLength"
           stroke="#fff"
           dot={false}

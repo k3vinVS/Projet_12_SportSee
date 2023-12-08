@@ -15,6 +15,11 @@ import "../styles/home.css";
 import "../styles/bottomComponent.css";
 // import { useFetch } from "../utils/hooks";
 // import { useParams } from "react-router";
+import dataUser from "../utils/modelizeData/userPerfModelize";
+// console.log(dataUser(data.USER_PERFORMANCE)[0].kind);
+const userPerformance = dataUser(data.USER_PERFORMANCE);
+const user = userPerformance.map((el) => el.kind);
+console.log(user);
 
 const Home = () => {
   // console.log(objectif1);
@@ -40,7 +45,7 @@ const Home = () => {
                 className="bottomComponent-container"
                 style={{ backgroundColor: "#282D30" }}
               >
-                <RadarChartsGraph data={data} />
+                <RadarChartsGraph dataUser={user} />
               </div>
               <div
                 className="bottomComponent-container"

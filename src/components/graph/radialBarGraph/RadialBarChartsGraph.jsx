@@ -7,6 +7,11 @@ import {
   PolarAngleAxis,
 } from "recharts";
 
+/**
+ *
+ * @param {*} param0
+ * @returns
+ */
 const RadialBarChartsGraph = ({ data }) => {
   const kpi1 = data.USER_MAIN_DATA; // PREMIER USER
   // const kpi2 = data.USER_MAIN_DATA[1]; // DEUXIEME USER
@@ -26,10 +31,10 @@ const RadialBarChartsGraph = ({ data }) => {
   // console.log(dataExemple);
 
   const style = {
-    top: "75%",
+    top: "65%",
     right: 8,
     lineHeight: "15px",
-    fontSize: "0.9rem",
+    fontSize: "0.6rem",
   };
 
   // Convertir les "todayScore" en pourcentage ---
@@ -39,17 +44,19 @@ const RadialBarChartsGraph = ({ data }) => {
         style={{
           color: "#20253A",
           fontSize: "0.94rem",
+          fontWeight: 500,
           position: "absolute",
-          margin: "0.5rem",
+          margin: "0.1rem",
+          paddingTop: "0.5rem",
         }}
       >
         Score
       </span>
       <RadialBarChart
-        startAngle={210}
-        endAngle={-30}
+        startAngle={180}
+        endAngle={-180}
         cx="50%"
-        cy="70%"
+        cy="60%"
         innerRadius="80%"
         barSize={5}
         data={kpi1}
@@ -58,11 +65,16 @@ const RadialBarChartsGraph = ({ data }) => {
         <RadialBar
           minAngle={90}
           clockWise
-          background
+          background={{ opacity: "0.1" }}
           cornerRadius={5}
           dataKey="todayScore"
           style={{ fill: "red" }}
-          label={{ fill: "#282D30", position: "center", fontSize: "0.8rem" }}
+          label={{
+            fill: "#282D30",
+            position: "center",
+            fontSize: "0.8rem",
+            fontWeight: 700,
+          }}
         />
         <Legend
           iconSize={0}
@@ -72,7 +84,9 @@ const RadialBarChartsGraph = ({ data }) => {
           verticalAlign="middle"
           align="center"
           wrapperStyle={style}
-          payload={[{ value: "de votre objectif", color: "#74798C" }]}
+          payload={[
+            { value: "de votre objectif", color: "#74798C", fontWeight: 500 },
+          ]}
         />
       </RadialBarChart>
     </ResponsiveContainer>
