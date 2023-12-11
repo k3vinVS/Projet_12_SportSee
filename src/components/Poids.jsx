@@ -3,10 +3,12 @@ import redPoint from "../assets/red-point.png";
 import blackPoint from "../assets/black-point.png";
 import SimpleBarChartsGraph from "../components/graph/simpleBarGraph/SimpleBarChartsGraph";
 import "../styles/poids.css";
+import { dataUser } from "../utils/modelizeData/userPerfModelize";
 
 const Poids = ({ data }) => {
-  const activity1 = data.USER_ACTIVITY[0].sessions; // PREMIER USER
-  // const activity2 = data.USER_ACTIVITY[1].sessions; // DEUXIEME USER
+  const user = dataUser(data.USER_ACTIVITY);
+  // console.log(user);
+
   return (
     <div className="poids-container">
       <div className="header">
@@ -22,7 +24,7 @@ const Poids = ({ data }) => {
           </span>
         </div>
       </div>
-      <SimpleBarChartsGraph data={activity1} />
+      <SimpleBarChartsGraph data={user[0]} />
     </div>
   );
 };

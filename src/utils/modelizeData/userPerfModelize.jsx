@@ -37,11 +37,4 @@ export const dataUser = (array) =>
     } else {
       return console.log("test non ok");
     }
-    // console.log(data.sessions);
-    // switch (data.sessions) {
-    //   case 0:
-    //     return console.log("test average");
-    //   default:
-    //     return console.log("test non ok");
-    // }
   });
