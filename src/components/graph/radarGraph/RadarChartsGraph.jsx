@@ -6,20 +6,11 @@ import {
   PolarAngleAxis,
   ResponsiveContainer,
 } from "recharts";
-// import dataUser from "../../../mocks/dataMock";
 import { dataPerformanceFormat } from "../../../utils/modelizeData/userPerfModelize";
 
 const RadarChartsGraph = ({ data }) => {
-  // console.log(dataPerformanceFormat(data));
-
-  const user = dataPerformanceFormat(data.USER_PERFORMANCE[0].data);
-  console.log(user);
-  // const radar1 = data.USER_PERFORMANCE[0]; // PREMIER USER
-  // const radar2 = data.USER_PERFORMANCE[1].data; // DEUXIEME USER
-
-  // const test = data.USER_PERFORMANCE[0].kind;
-  // const myArray = Object.values(test);
-  // console.log(test);
+  const user = dataPerformanceFormat(data.USER_PERFORMANCE[0].data); // Fonction qui permet de trier les informations des données mokées avant utilisation
+  // console.log(user);
 
   return (
     <ResponsiveContainer width="100%" height="100%">

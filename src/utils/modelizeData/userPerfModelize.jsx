@@ -1,5 +1,4 @@
-// import dataUser from "../../mocks/dataMock";
-
+// import data from "../../mocks/dataMock";
 /**
  * Format userPerformance' data for RadarChartGraph component
  * dataPerformanceFormat
@@ -29,5 +28,20 @@ export const dataPerformanceFormat = (array) =>
     }
   });
 
-// export default dataPerformanceFormat;
-// export default dataAverageSessions(data.USER_AVERAGE_SESSIONS);
+// LINECHARTSGRAPH MOKED DATA -----
+export const dataUser = (array) =>
+  // Return seulement session?
+  array.map((data) => {
+    if (data.sessions) {
+      return [...data.sessions];
+    } else {
+      return console.log("test non ok");
+    }
+    // console.log(data.sessions);
+    // switch (data.sessions) {
+    //   case 0:
+    //     return console.log("test average");
+    //   default:
+    //     return console.log("test non ok");
+    // }
+  });

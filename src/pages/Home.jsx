@@ -15,12 +15,8 @@ import "../styles/home.css";
 import "../styles/bottomComponent.css";
 // import { useFetch } from "../utils/hooks";
 // import { useParams } from "react-router";
-// import { dataPerformanceFormat } from "../utils/modelizeData/userPerfModelize.jsx";
-// console.log(dataPerformanceFormat);
 
 const Home = () => {
-  // console.log(objectif1);
-
   return (
     <div className="homepage">
       <Liens />

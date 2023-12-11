@@ -14,7 +14,6 @@ import {
  */
 const RadialBarChartsGraph = ({ data }) => {
   const kpi1 = data.USER_MAIN_DATA; // PREMIER USER
-  // const kpi2 = data.USER_MAIN_DATA[1]; // DEUXIEME USER
   // const pourcentage = `${kpi1[0].todayScore * 100}`;
 
   // console.log(kpi1);
