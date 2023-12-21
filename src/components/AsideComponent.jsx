@@ -1,15 +1,16 @@
 import React from "react";
 import "../styles/asideComponent.css";
 
-const AsideComponent = ({ data, content, icone, description }) => {
+const AsideComponent = ({ content, icone, description }) => {
+  let contentFormat = [content].toLocaleString("en-US");
   return (
     <div className="asideComponent-container">
       <img src={icone} alt="icone" />
       <div className="text">
         {description === "Calories" ? (
-          <h1>{content} kCal</h1>
+          <h1>{contentFormat} kCal</h1>
         ) : (
-          <h1>{content} g</h1>
+          <h1>{contentFormat} g</h1>
         )}
 
         <small>{description}</small>

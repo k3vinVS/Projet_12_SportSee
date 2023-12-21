@@ -1,6 +1,6 @@
 import React from "react";
-import "../styles/liens.css";
 import { Link, NavLink } from "react-router-dom";
+import "../styles/liens.css";
 import logo from "../assets/logo-site.png";
 import haltereIcon from "../assets/icon-haltere.png";
 import bikeIcon from "../assets/icon-bike.png";
@@ -18,7 +18,7 @@ const Liens = () => {
         </div>
         <nav className="liens">
           <NavLink>Accueil</NavLink>
-          <NavLink>Profil</NavLink>
+          <NavLink to="/user">Profil</NavLink>
           <NavLink>Réglage</NavLink>
           <NavLink>Communité</NavLink>
         </nav>

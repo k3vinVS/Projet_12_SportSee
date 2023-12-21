@@ -6,28 +6,22 @@ import {
   Legend,
   PolarAngleAxis,
 } from "recharts";
+// import { dataUser } from "../../../utils/modelizeData/userPerfModelize";
 
 /**
  *
  * @param {*} param0
  * @returns
  */
-const RadialBarChartsGraph = ({ data }) => {
-  const kpi1 = data.USER_MAIN_DATA; // PREMIER USER
-  // const pourcentage = `${kpi1[0].todayScore * 100}`;
-
-  // console.log(kpi1);
-  // console.log(pourcentage);
-
-  // const dataExemple = [
-  //   {
-  //     name: "12",
-  //     uv: 31.47,
-  //     pv: 2400,
-  //     fill: "#8884d8",
-  //   },
-  // ];
-  // console.log(dataExemple);
+const RadialBarChartsGraph = ({ todayScore }) => {
+  if (!todayScore) {
+    return <p>Error</p>;
+  }
+  const data = [
+    {
+      score: todayScore,
+    },
+  ];
 
   const style = {
     top: "65%",
@@ -36,7 +30,10 @@ const RadialBarChartsGraph = ({ data }) => {
     fontSize: "0.6rem",
   };
 
-  // Convertir les "todayScore" en pourcentage ---
+  // Convertir les "todayScore" en pourcentage ("fixed=0" permet d'avoir des nombre entiers) ---
+  const toPercent = (decimal, fixed = 0) =>
+    `${(decimal * 100).toFixed(fixed)}%`;
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <span
@@ -58,21 +55,27 @@ const RadialBarChartsGraph = ({ data }) => {
         cy="60%"
         innerRadius="80%"
         barSize={5}
-        data={kpi1}
+        data={data}
       >
-        <PolarAngleAxis type="number" domain={[0, 1]} tick={false} />
+        <PolarAngleAxis
+          type="number"
+          domain={[0, 1]}
+          tick={false}
+          angleAxisId={0}
+        />
         <RadialBar
           minAngle={90}
           clockWise
           background={{ opacity: "0.1" }}
           cornerRadius={5}
-          dataKey="todayScore"
+          dataKey="score"
           style={{ fill: "red" }}
           label={{
             fill: "#282D30",
             position: "center",
             fontSize: "0.8rem",
             fontWeight: 700,
+            formatter: toPercent,
           }}
         />
         <Legend

@@ -1,0 +1,22 @@
+.users-container {
+  display: flex;
+  gap: 10rem;
+  position: absolute;
+  top: 40%;
+  left: 25%;
+}
+
+.profile {
+  width: 15rem;
+  height: 15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  /* border: 1px solid #74798c; */
+  border-radius: 50%;
+  color: #e60000;
+  background-color: #fbfbfb;
+  box-shadow: 8px 5px 10px 5px rgba(0, 0, 0, 0.1);
+}

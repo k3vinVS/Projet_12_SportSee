@@ -9,7 +9,7 @@
 export const dataPerformanceFormat = (array) =>
   // Add a property 'activity' for each kind of object in array.
   // & reverse the order of kind for respect the design mock-up.
-  array.map((data) => {
+  array.reverse().map((data) => {
     switch (data.kind) {
       case 1:
         return { activity: "Cardio", ...data };
@@ -28,13 +28,15 @@ export const dataPerformanceFormat = (array) =>
     }
   });
 
-// LINECHARTSGRAPH MOKED DATA -----
-export const dataUser = (array) =>
-  // Return seulement session?
-  array.map((data) => {
-    if (data.sessions) {
-      return [...data.sessions];
-    } else {
-      return console.log("test non ok");
-    }
-  });
+// // LINECHARTSGRAPH MOKED DATA -----
+// export const dataUser = (array) =>
+//   // Return seulement session?
+//   array.map((data) => {
+//     if (data.sessions) {
+//       return [...data.sessions];
+//     } else if (data.score) {
+//       return [data.score];
+//     } else {
+//       return { ...data };
+//     }
+//   });

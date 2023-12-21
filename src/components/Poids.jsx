@@ -13,7 +13,7 @@ const Poids = ({ data }) => {
     <div className="poids-container">
       <div className="header">
         <p>Activité quotidienne</p>
-        <div className="data-legend">
+        {/* <div className="data-legend">
           <span>
             <img src={blackPoint} alt="index couleur" />
             <p>Poids (kg)</p>
@@ -22,7 +22,7 @@ const Poids = ({ data }) => {
             <img src={redPoint} alt="index couleur" />
             <p>Calories brûlées (kCal)</p>
           </span>
-        </div>
+        </div> */}
       </div>
       <SimpleBarChartsGraph data={user[0]} />
     </div>

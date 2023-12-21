@@ -7,9 +7,11 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  Legend,
 } from "recharts";
+import "../../../styles/poids.css";
 
-const SimpleBarChartsGraph = ({ data }) => {
+const SimpleBarChartsGraph = ({ userActivity }) => {
   const formatYAxis = (formatDay) => {
     return formatDay + 1;
   };
@@ -44,39 +46,77 @@ const SimpleBarChartsGraph = ({ data }) => {
   };
 
   return (
-    <ResponsiveContainer width="100%" height="70%">
-      <BarChart width={500} height={300} data={data} barGap="10">
-        <Tooltip content={CustomTooltip} />
-        <CartesianGrid strokeDasharray="3" vertical={false} />
-        <XAxis
-          tickLine={false}
-          tick={{ fill: "#9B9EAC" }}
-          tickFormatter={formatYAxis}
-          tickMargin={15}
-          stroke="#DEDEDE"
-        />
-        <YAxis
-          orientation="right"
-          tickMargin={30}
-          stroke=""
-          tick={{ fill: "#9B9EAC" }}
-          // tickLine={false}
-          // tickFormatter={false}
-        />
-        <Bar
-          dataKey="kilogram"
-          fill="black"
-          radius={[50, 50, 0, 0]}
-          barSize={10}
-        />
-        <Bar
-          dataKey="calories"
-          fill="red"
-          radius={[50, 50, 0, 0]}
-          barSize={10}
-        />
-      </BarChart>
-    </ResponsiveContainer>
+    <div className="poids-container">
+      <h2>Activité quotidienne</h2>
+      <ResponsiveContainer width={"100%"} height={"100%"}>
+        <BarChart
+          // width={500}
+          // height={300}
+          margin={{ top: 80, right: 35, bottom: 30, left: 35 }}
+          data={userActivity}
+          barGap={8}
+          barCategoryGap="35%"
+        >
+          <Tooltip content={CustomTooltip} position={{ y: 90 }} />
+          <Legend
+            verticalAlign="top"
+            align="right"
+            wrapperStyle={{
+              position: "absolute",
+              top: "5px",
+              fontSize: "0.84rem",
+              paddingTop: "1.2rem",
+            }}
+            formatter={(value) => (
+              <span style={{ color: "#74798c" }}>{value}</span>
+            )}
+            iconType="circle"
+            iconSize="7"
+          />
+          <CartesianGrid strokeDasharray="3" vertical={false} />
+          <XAxis
+            tickLine={false}
+            tick={{ fontSize: "0.88rem", fontWeight: 500 }}
+            tickFormatter={formatYAxis}
+            dy={15}
+            stroke="#9B9EAC"
+            padding={{ left: -20, right: -20 }}
+          />
+          <YAxis
+            orientation="right"
+            dataKey="kilogram"
+            domain={["dataMin - 1", "dataMax + 1"]}
+            allowDecimals={false}
+            dx={30}
+            stroke="#9B9EAC"
+            axisLine={false}
+            tickLine={false}
+            tick={{ fontSize: "0.88rem", fontWeight: 500 }}
+          />
+          <YAxis
+            yAxisId="cal"
+            dataKey="calories"
+            domain={[0, "dataMax + 50"]}
+            hide={true}
+          />
+          <Bar
+            name="Poids (kg)"
+            dataKey="kilogram"
+            fill="#282D30"
+            radius={[50, 50, 0, 0]}
+            BarSize={10}
+          />
+          <Bar
+            name="Calories brûlées (kCal)"
+            dataKey="calories"
+            fill="#E60000"
+            radius={[50, 50, 0, 0]}
+            BarSize={10}
+            yAxisId="cal"
+          />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
 

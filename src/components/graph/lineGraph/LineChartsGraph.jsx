@@ -1,9 +1,7 @@
 import React from "react";
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from "recharts";
-import { dataUser } from "../../../utils/modelizeData/userPerfModelize";
-// console.log(dataUser);
 
-const LineChartsGraph = ({ data }) => {
+const LineChartsGraph = ({ userAverageSessions }) => {
   const daysOfWeek = ["L", "M", "M", "J", "V", "S", "D"];
   const formatXAxis = (tickItem) => {
     return daysOfWeek[tickItem];
@@ -33,12 +31,9 @@ const LineChartsGraph = ({ data }) => {
     return null;
   };
 
-  const user = dataUser(data.USER_AVERAGE_SESSIONS);
-  // console.log(user[0]);
-
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <LineChart width={500} height={300} data={user[0]}>
+      <LineChart width={500} height={300} data={userAverageSessions}>
         <XAxis
           tickFormatter={formatXAxis}
           stroke=""

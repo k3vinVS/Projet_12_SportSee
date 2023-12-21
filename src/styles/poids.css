@@ -1,16 +1,27 @@
 .poids-container {
   max-width: 52.2rem;
-  height: 100%;
-  max-height: 20rem;
+  width: 100%;
+  height: 20rem;
+  /* max-height: 20rem; */
   border-radius: 0.31rem;
   background: #fbfbfb;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.02);
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
+  display: flex;
+
+  /* justify-content: center; */
+  /* align-items: center; */
   /* border: 1px solid blue; */
 }
 
+.poids-container h2 {
+  position: absolute;
+  font-size: 0.84rem;
+  color: #20253a;
+  padding: 1.5rem 2rem;
+}
+
+
+/* A GARDER ?*/
 .header {
   max-width: 52.2rem;
   display: flex;

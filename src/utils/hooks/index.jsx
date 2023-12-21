@@ -1,23 +1,9 @@
-import { useEffect, useState } from "react";
+import axios from "axios";
 
-export function useFetch(url, id) {
-  const [data, setData] = useState({});
-  const [error, setError] = useState(false);
+const baseURL = axios.create({
+  baseURL: "http://localhost:3000/user",
+});
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(url);
-        // console.log(response);
-        const data = await response.json();
-        console.log(data);
-        setData(data);
-      } catch (err) {
-        console.log(err);
-        setError(true);
-      }
-    }
-    fetchData();
-  }, [url, id]);
-  return { data, error };
-}
+export const getUserData = (id, endpoint) => baseURL.get(`/${id}/${endpoint}`);
+
+
