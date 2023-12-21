@@ -1,8 +1,8 @@
 .bottomComponent-container {
-  width: 8rem;
-  /* max-width: 16.1rem; */
-  height: 8rem;
-  /* max-height: 16.4rem; */
+  width: 10rem;
+  max-width: 16.1rem;
+  height: 10rem;
+  max-height: 16.4rem;
   padding: 0 0.15rem 0.3rem 0.15rem;
   /* padding-bottom: 0.3rem; */
   display: flex;
@@ -13,4 +13,16 @@
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.02);
   flex-shrink: 0;
   overflow: hidden;
+}
+
+.recharts-polar-angle-axis-tick-value {
+  transform: translateY(0.2rem);
+}
+
+.legend-container {
+  position: absolute;
+  font-size: 0.64rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  opacity: 0.504;
 }

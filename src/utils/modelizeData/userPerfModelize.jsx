@@ -1,14 +1,4 @@
-// import data from "../../mocks/dataMock";
-/**
- * Format userPerformance' data for RadarChartGraph component
- * dataPerformanceFormat
- * @param {array} array
- * @returns {object} activity, data(value, kind)
- */
-
 export const dataPerformanceFormat = (array) =>
-  // Add a property 'activity' for each kind of object in array.
-  // & reverse the order of kind for respect the design mock-up.
   array.reverse().map((data) => {
     switch (data.kind) {
       case 1:
@@ -27,16 +17,3 @@ export const dataPerformanceFormat = (array) =>
         return { ...data };
     }
   });
-
-// // LINECHARTSGRAPH MOKED DATA -----
-// export const dataUser = (array) =>
-//   // Return seulement session?
-//   array.map((data) => {
-//     if (data.sessions) {
-//       return [...data.sessions];
-//     } else if (data.score) {
-//       return [data.score];
-//     } else {
-//       return { ...data };
-//     }
-//   });

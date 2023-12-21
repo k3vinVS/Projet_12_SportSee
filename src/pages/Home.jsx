@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Liens from "../components/Liens";
 import Header from "../components/Header";
-// import Poids from "../components/Poids";
 import LineChartsGraph from "../components/graph/lineGraph/LineChartsGraph";
 import RadarChartsGraph from "../components/graph/radarGraph/RadarChartsGraph";
 import RadialBarChartsGraph from "../components/graph/radialBarGraph/RadialBarChartsGraph";
 import AsideComponent from "../components/AsideComponent";
-import data from "../mocks/dataMock";
 import calorieIcon from "../assets/calories-icon.png";
 import proteinIcon from "../assets/protein-icon.png";
 import carbsIcon from "../assets/carbs-icon.png";
@@ -14,10 +12,10 @@ import fatIcon from "../assets/fat-icon.png";
 import "../styles/home.css";
 import "../styles/bottomComponent.css";
 import SimpleBarChartsGraph from "../components/graph/simpleBarGraph/SimpleBarChartsGraph";
-import { useFetch } from "../utils/hooks";
 import { useParams } from "react-router";
 import { getUserData } from "../utils/hooks/index";
 import Error from "./Error";
+// import data from "../mocks/dataMock";
 
 const Home = () => {
   const { id } = useParams();
@@ -74,7 +72,7 @@ const Home = () => {
               <div className="data-bottom">
                 <div
                   className="bottomComponent-container"
-                  style={{ backgroundColor: "red" }}
+                  style={{ backgroundColor: "red", padding: 0 }}
                 >
                   <LineChartsGraph userAverageSessions={userAverageSessions} />
                 </div>

@@ -16,6 +16,7 @@
 
 .lien-retour {
   text-decoration: none;
+  color: #e60000;
 }
 
 .lien-retour::before {

@@ -14,11 +14,11 @@ const RadarChartsGraph = ({ userPerformance }) => {
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <RadarChart cx="50%" cy="50%" outerRadius="49%" data={user}>
+      <RadarChart cx="50%" cy="50%" outerRadius="60%" data={user}>
         <PolarGrid radialLines={false} />
         <PolarAngleAxis
           dataKey="activity"
-          style={{ fontSize: "0.4rem", color: "#FFF" }}
+          style={{ fontSize: "0.6rem", color: "#FFF" }}
           tickMargin={0}
           tick={{ margin: 0 }}
         />

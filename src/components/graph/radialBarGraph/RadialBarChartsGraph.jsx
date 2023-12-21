@@ -6,13 +6,7 @@ import {
   Legend,
   PolarAngleAxis,
 } from "recharts";
-// import { dataUser } from "../../../utils/modelizeData/userPerfModelize";
 
-/**
- *
- * @param {*} param0
- * @returns
- */
 const RadialBarChartsGraph = ({ todayScore }) => {
   if (!todayScore) {
     return <p>Error</p>;
@@ -25,7 +19,7 @@ const RadialBarChartsGraph = ({ todayScore }) => {
 
   const style = {
     top: "65%",
-    right: 8,
+    right: 25,
     lineHeight: "15px",
     fontSize: "0.6rem",
   };

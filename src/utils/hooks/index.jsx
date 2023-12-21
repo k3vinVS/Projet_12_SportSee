@@ -5,5 +5,3 @@ const baseURL = axios.create({
 });
 
 export const getUserData = (id, endpoint) => baseURL.get(`/${id}/${endpoint}`);
-
-
