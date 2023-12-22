@@ -15,14 +15,33 @@
   overflow: hidden;
 }
 
-.recharts-polar-angle-axis-tick-value {
-  transform: translateY(0.2rem);
+/* LINECHART GRAPH */
+.custom-tooltip {
+  width: 39px;
+  height: 25px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-tooltip .label {
+  color: black;
+  font-size: 0.5rem;
 }
 
 .legend-container {
+  width: 9rem;
   position: absolute;
-  font-size: 0.64rem;
+  padding-left: 1.5rem;
+  padding-top: 0.5rem;
+  font-size: 0.74rem;
   font-weight: 500;
   line-height: 1.5rem;
   opacity: 0.504;
+}
+
+/* RADARCHART GRAPH */
+.recharts-polar-angle-axis-tick-value {
+  transform: translateY(0.2rem);
 }

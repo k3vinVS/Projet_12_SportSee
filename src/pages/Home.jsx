@@ -15,7 +15,7 @@ import SimpleBarChartsGraph from "../components/graph/simpleBarGraph/SimpleBarCh
 import { useParams } from "react-router";
 import { getUserData } from "../utils/hooks/index";
 import Error from "./Error";
-// import data from "../mocks/dataMock";
+// import dataArray from "../mocks/dataMock";
 
 const Home = () => {
   const { id } = useParams();
@@ -37,6 +37,7 @@ const Home = () => {
         setTodayScore(
           userInfos.data.data.todayScore || userInfos.data.data.score
         );
+
         const activity = await getUserData(id, "activity");
         // console.log(activity);
         setUserActivity(activity.data.data.sessions);
