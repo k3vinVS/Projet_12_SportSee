@@ -1,12 +1,12 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import "../styles/liens.css";
 import logo from "../assets/logo-site.png";
 import haltereIcon from "../assets/icon-haltere.png";
 import bikeIcon from "../assets/icon-bike.png";
 import natationIcon from "../assets/icon-natation.png";
 import yogaIcon from "../assets/icon-yoga.png";
 import nameSite from "../assets/name-site.png";
+import "../styles/liens.css";
 
 const Liens = () => {
   return (
@@ -19,8 +19,12 @@ const Liens = () => {
         <nav className="liens">
           <NavLink>Accueil</NavLink>
           <NavLink to="/user">Profil</NavLink>
-          <NavLink>Réglage</NavLink>
-          <NavLink>Communité</NavLink>
+          <NavLink to="/user/setting" onClick={(e) => e.preventDefault()}>
+            Réglage
+          </NavLink>
+          <NavLink to="/user/community" onClick={(e) => e.preventDefault()}>
+            Communité
+          </NavLink>
         </nav>
       </div>
       <div className="liens-container_bottom">
