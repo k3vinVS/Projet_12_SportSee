@@ -73,7 +73,7 @@ const Home = () => {
               <div className="data-bottom">
                 <div
                   className="bottomComponent-container"
-                  style={{ backgroundColor: "red", padding: 0 }}
+                  style={{ backgroundColor: "red", padding: 0, margin: 0 }}
                 >
                   <LineChartsGraph userAverageSessions={userAverageSessions} />
                 </div>
