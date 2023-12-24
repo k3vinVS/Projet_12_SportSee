@@ -13,7 +13,7 @@ import { dataAverageSession } from "../../../utils/modelizeData/userPerfModelize
 const LineChartsGraph = ({ userAverageSessions }) => {
   const users = [...userAverageSessions];
   const user = dataAverageSession(users);
-  console.log(user);
+  // console.log(user);
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
@@ -36,7 +36,7 @@ const LineChartsGraph = ({ userAverageSessions }) => {
         <XAxis
           dataKey="letterDay"
           stroke=""
-          tick={{ fill: "#fff", fontSize: "12px", dy: -25 }}
+          tick={{ fill: "#fff", fontSize: "12px", dy: -28 }}
         />
         <YAxis hide={true} padding={{ bottom: 30 }} />
         <Tooltip
@@ -53,7 +53,7 @@ const LineChartsGraph = ({ userAverageSessions }) => {
           dataKey="sessionLength"
           stroke="#fff"
           dot={false}
-          activeDot={{ r: 5, fill: "#fff" }}
+          activeDot={{ r: 3, fill: "#fff" }}
         />
         <Legend verticalAlign="top" content={legendContent} />
       </LineChart>
