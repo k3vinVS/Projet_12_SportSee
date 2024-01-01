@@ -1,6 +1,6 @@
-.liens-container {
+/* .liens-container {
   width: 100%;
-}
+} */
 
 .liens-container_top {
   width: 100%;
@@ -24,6 +24,8 @@
   align-items: center;
   gap: 0.66rem;
   padding-left: 1.81rem;
+  position: fixed;
+  left: 0;
 }
 
 .liens-container_top nav {
@@ -33,6 +35,7 @@
   display: flex;
   justify-content: space-around;
   padding-right: 5.69rem;
+  margin-left: 14rem;
 }
 
 .liens-container_top nav a {

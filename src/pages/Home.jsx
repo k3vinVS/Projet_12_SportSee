@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { getUserData } from "../utils/hooks/index";
+
 import Liens from "../components/Liens";
 import Header from "../components/Header";
+
+import SimpleBarChartsGraph from "../components/graph/simpleBarGraph/SimpleBarChartsGraph";
 import LineChartsGraph from "../components/graph/lineGraph/LineChartsGraph";
 import RadarChartsGraph from "../components/graph/radarGraph/RadarChartsGraph";
 import RadialBarChartsGraph from "../components/graph/radialBarGraph/RadialBarChartsGraph";
+
 import AsideComponent from "../components/AsideComponent";
 import calorieIcon from "../assets/calories-icon.png";
 import proteinIcon from "../assets/protein-icon.png";
 import carbsIcon from "../assets/carbs-icon.png";
 import fatIcon from "../assets/fat-icon.png";
+
+import Error from "./Error";
+
 import "../styles/home.css";
 import "../styles/bottomComponent.css";
-import SimpleBarChartsGraph from "../components/graph/simpleBarGraph/SimpleBarChartsGraph";
-import { useParams } from "react-router";
-import { getUserData } from "../utils/hooks/index";
-import Error from "./Error";
-// import dataArray from "../mocks/dataMock";
 
-const Home = () => {
+const Home = (mockData) => {
   const { id } = useParams();
   const [userInfos, setUserInfos] = useState({});
   const [todayScore, setTodayScore] = useState();
-  const [keyData, setKeyData] = useState({});
+  const [userKeyData, setUserKeyData] = useState({});
   const [userActivity, setUserActivity] = useState([]);
   const [userAverageSessions, setUserAverageSessions] = useState([]);
   const [userPerformance, setUserPerformance] = useState([]);
@@ -31,31 +35,58 @@ const Home = () => {
     async function getProfileData() {
       try {
         const userInfos = await getUserData(id, "");
-        // console.log(userInfos);
-        setUserInfos(userInfos.data.data.userInfos);
-        setKeyData(userInfos.data.data.keyData);
-        setTodayScore(
-          userInfos.data.data.todayScore || userInfos.data.data.score
-        );
 
         const activity = await getUserData(id, "activity");
-        // console.log(activity);
-        setUserActivity(activity.data.data.sessions);
 
         const averageSessions = await getUserData(id, "average-sessions");
-        // console.log(averageSessions);
-        setUserAverageSessions(averageSessions.data.data.sessions);
 
         const performance = await getUserData(id, "performance");
-        // console.log(performance);
-        setUserPerformance(performance.data.data.data);
+
+        // !mockData => données mockées et mockData => données API -----
+        if (!mockData) {
+          // WHEN DATA IS FROM API ----------
+          console.log("données API: ", userInfos);
+
+          // USER_MAIN_DATA -----
+          setUserInfos(userInfos.data.data.userInfos);
+          setUserKeyData(userInfos.data.data.keyData);
+          setTodayScore(userInfos.data.data.todayScore);
+
+          // ACTIVITY -----
+          setUserActivity(activity.data.data.sessions);
+
+          // AVERAGESESSIONS -----
+          setUserAverageSessions(averageSessions.data.data.sessions);
+
+          // PERFORMANCE -----
+          setUserPerformance(performance.data.data.data);
+        } else {
+          // WHEN DATA IS MOCKED ----------
+          console.log("données mockées: ", userInfos);
+
+          // USER_MAIN_DATA -----
+          setUserInfos(userInfos.userInfos.userInfos);
+          setUserKeyData(userInfos.userInfos.keyData);
+          setTodayScore(
+            userInfos.userInfos.todayScore || userInfos.userInfos.score
+          );
+
+          // ACTIVITY -----
+          setUserActivity(userInfos.activity.sessions);
+
+          // AVERAGESESSIONS -----
+          setUserAverageSessions(userInfos.averageSessions.sessions);
+
+          // PERFORMANCE -----
+          setUserPerformance(userInfos.performance.data);
+        }
       } catch (error) {
-        // console.log(error);
+        console.log("ERROR: ", error);
         setError(true);
       }
     }
     getProfileData();
-  }, [id]);
+  }, [id, mockData]);
 
   if (setError === true || error || !id) {
     return <Error />;
@@ -94,22 +125,22 @@ const Home = () => {
             <div className="data-container_right">
               <div className="data-right">
                 <AsideComponent
-                  content={keyData.calorieCount}
+                  content={userKeyData.calorieCount}
                   icone={calorieIcon}
                   description={"Calories"}
                 />
                 <AsideComponent
-                  content={keyData.proteinCount}
+                  content={userKeyData.proteinCount}
                   icone={proteinIcon}
                   description={"Proteines"}
                 />
                 <AsideComponent
-                  content={keyData.carbohydrateCount}
+                  content={userKeyData.carbohydrateCount}
                   icone={carbsIcon}
                   description={"Glucides"}
                 />
                 <AsideComponent
-                  content={keyData.lipidCount}
+                  content={userKeyData.lipidCount}
                   icone={fatIcon}
                   description={"Lipides"}
                 />
