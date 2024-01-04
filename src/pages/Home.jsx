@@ -21,7 +21,7 @@ import Error from "./Error";
 import "../styles/home.css";
 import "../styles/bottomComponent.css";
 
-const Home = (mockData) => {
+const Home = (dataApi) => {
   const { id } = useParams();
   const [userInfos, setUserInfos] = useState({});
   const [todayScore, setTodayScore] = useState();
@@ -35,15 +35,17 @@ const Home = (mockData) => {
     async function getProfileData() {
       try {
         const userInfos = await getUserData(id, "");
+        // console.log(userInfos);
 
         const activity = await getUserData(id, "activity");
+        // console.log(activity);
 
         const averageSessions = await getUserData(id, "average-sessions");
 
         const performance = await getUserData(id, "performance");
 
-        // !mockData => données mockées et mockData => données API -----
-        if (!mockData) {
+        // !dataApi => données mockées et dataApi => données API -----
+        if (!dataApi) {
           // WHEN DATA IS FROM API ----------
           console.log("données API: ", userInfos);
 
@@ -86,7 +88,7 @@ const Home = (mockData) => {
       }
     }
     getProfileData();
-  }, [id, mockData]);
+  }, [id, dataApi]);
 
   if (setError === true || error || !id) {
     return <Error />;

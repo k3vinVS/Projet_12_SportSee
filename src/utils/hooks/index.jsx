@@ -1,31 +1,27 @@
+/* eslint-disable eqeqeq */
 import axios from "axios";
 import data from "../../mocks/data";
-// const baseURL = axios.create({
-//   baseURL: "http://localhost:3001/user",
-// });
 
-export const getUserData = (id, endpoint, mockData) => {
-  // !mockData => données mockées et mockData => données API -----
-  if (!mockData) {
-    const userInfos =
-      id === "12" ? data.USER_MAIN_DATA[0] : data.USER_MAIN_DATA[1];
-
-    const activity =
-      id === "12" ? data.USER_ACTIVITY[0] : data.USER_ACTIVITY[1];
-
-    const averageSessions =
-      id === "12"
-        ? data.USER_AVERAGE_SESSIONS[0]
-        : data.USER_AVERAGE_SESSIONS[1];
-
-    const performance =
-      id === "12" ? data.USER_PERFORMANCE[0] : data.USER_PERFORMANCE[1];
-
+export const getUserData = (id, endpoint, dataApi) => {
+  // "!dataApi" => données mockées et "dataApi" => données API -----
+  // console.log(data.USER_MAIN_DATA[0].id !== id);
+  // console.log(id);
+  if (!dataApi) {
+    // eslint-disable-next-line eqeqeq
+    const userInfos = data.USER_MAIN_DATA.find((user) => user.id == id);
     // console.log(userInfos);
+
+    // eslint-disable-next-line eqeqeq
+    const activity = data.USER_ACTIVITY.find((user) => user.userId == id);
+
+    const averageSessions = data.USER_AVERAGE_SESSIONS.find(
+      (user) => user.userId == id
+    );
+
+    const performance = data.USER_PERFORMANCE.find((user) => user.userId == id);
 
     return { id, userInfos, activity, averageSessions, performance };
   } else {
-    // return baseURL.get(`/${id}/${endpoint}`);
     return axios.get(`http://localhost:3000/user/${id}/${endpoint}`);
   }
 };
