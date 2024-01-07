@@ -1,12 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/error.css";
-import Liens from "../components/Liens";
+import Header from "../components/Header";
 
 const Error = () => {
   return (
     <>
-      <Liens />
+      <Header />
       <div className="error-container">
         <h1>Oups...! </h1>
         <h2>Il semblerait que la page que vous cherchez n'existe pas.</h2>

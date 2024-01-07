@@ -9,8 +9,9 @@ import {
 import { dataPerformanceFormat } from "../../../utils/modelizeData/userPerfModelize";
 
 const RadarChartsGraph = ({ userPerformance }) => {
-  const userPerformanceArray = [...userPerformance]; //Dupliquer tableau avant utilisation -----
-  const user = dataPerformanceFormat(userPerformanceArray); // Fonction qui permet de trier les informations des données mokées avant utilisation -----
+  // DUPLICATE ARRAY BEFORE USE & FUNCTION TO SORT INFORMATION FROM DATA BEFORE USE -----
+  const userPerformanceArray = [...userPerformance];
+  const user = dataPerformanceFormat(userPerformanceArray);
 
   return (
     <ResponsiveContainer width="100%" height="100%">

@@ -8,9 +8,7 @@ import {
 } from "recharts";
 
 const RadialBarChartsGraph = ({ todayScore }) => {
-  if (!todayScore) {
-    return <p>Error</p>;
-  }
+  // FORMAT DATA BEFORE USE -----
   const data = [
     {
       score: todayScore,
@@ -24,7 +22,7 @@ const RadialBarChartsGraph = ({ todayScore }) => {
     fontSize: "0.6rem",
   };
 
-  // Convertir les "todayScore" en pourcentage ("fixed=0" permet d'avoir des nombre entiers) ---
+  // CONVERT "TODAYSCORE" TO PERCENTAGE ("FIXED=0" FOR INTEGER NUMBERS) ---
   const toPercent = (decimal, fixed = 0) =>
     `${(decimal * 100).toFixed(fixed)}%`;
 

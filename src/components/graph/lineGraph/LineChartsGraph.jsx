@@ -11,10 +11,11 @@ import {
 import { dataAverageSession } from "../../../utils/modelizeData/userPerfModelize";
 
 const LineChartsGraph = ({ userAverageSessions }) => {
+  // DUPLICATE ARRAY BEFORE USE & FUNCTION TO SORT INFORMATION FROM DATA BEFORE USE -----
   const users = [...userAverageSessions];
   const user = dataAverageSession(users);
-  // console.log(user);
 
+  // MODIFY LEGEND'S DISPLAY -----
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
@@ -25,7 +26,6 @@ const LineChartsGraph = ({ userAverageSessions }) => {
     }
     return null;
   };
-
   const legendContent = () => {
     return <span className="legend-container">Durée moyenne des sessions</span>;
   };

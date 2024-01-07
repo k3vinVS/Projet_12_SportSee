@@ -12,10 +12,12 @@ import {
 import "../../../styles/poids.css";
 
 const SimpleBarChartsGraph = ({ userActivity }) => {
+  // CHANGE DAY'S FORMAT -----
   const formatYAxis = (formatDay) => {
     return formatDay + 1;
   };
 
+  // MODIFY LEGEND'S STYLE -----
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
@@ -50,8 +52,6 @@ const SimpleBarChartsGraph = ({ userActivity }) => {
       <h2>Activité quotidienne</h2>
       <ResponsiveContainer width={"100%"} height={"100%"}>
         <BarChart
-          // width={500}
-          // height={300}
           margin={{ top: 80, right: 35, bottom: 30, left: 35 }}
           data={userActivity}
           barGap={8}

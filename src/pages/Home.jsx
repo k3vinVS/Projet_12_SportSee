@@ -1,23 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+
+// MOCKED DATA & API -----
 import { getUserData } from "../utils/hooks/index";
 
-import Liens from "../components/Liens";
+// HEADER PAGE + HEADER INFOS USER -----
 import Header from "../components/Header";
+import UserInfosHeader from "../components/UserInfosHeader";
 
+// GRAPH -----
 import SimpleBarChartsGraph from "../components/graph/simpleBarGraph/SimpleBarChartsGraph";
 import LineChartsGraph from "../components/graph/lineGraph/LineChartsGraph";
 import RadarChartsGraph from "../components/graph/radarGraph/RadarChartsGraph";
 import RadialBarChartsGraph from "../components/graph/radialBarGraph/RadialBarChartsGraph";
 
+// USER INFOS CARD -----
 import AsideComponent from "../components/AsideComponent";
 import calorieIcon from "../assets/calories-icon.png";
 import proteinIcon from "../assets/protein-icon.png";
 import carbsIcon from "../assets/carbs-icon.png";
 import fatIcon from "../assets/fat-icon.png";
 
+// ERROR PAGE -----
 import Error from "./Error";
 
+// IMPORT STYLE PAGE & COMPONENTS -----
 import "../styles/home.css";
 import "../styles/bottomComponent.css";
 
@@ -34,17 +41,19 @@ const Home = (dataApi) => {
   useEffect(() => {
     async function getProfileData() {
       try {
+        // MOCKED DATA & API'S USER INFOS -----
         const userInfos = await getUserData(id, "");
-        // console.log(userInfos);
 
+        // USER ACTIVITY'S INFOS FROM API -----
         const activity = await getUserData(id, "activity");
-        // console.log(activity);
 
+        // USER AVERAGE_SESSIONS'S INFOS FROM API -----
         const averageSessions = await getUserData(id, "average-sessions");
 
+        // USER PERFORMANCE'S INFOS FROM API -----
         const performance = await getUserData(id, "performance");
 
-        // !dataApi => données mockées et dataApi => données API -----
+        // "!dataApi" => MOCKED DATA & "dataApi" => API'S DATA -----
         if (!dataApi) {
           // WHEN DATA IS FROM API ----------
           console.log("données API: ", userInfos);
@@ -91,14 +100,16 @@ const Home = (dataApi) => {
   }, [id, dataApi]);
 
   if (setError === true || error || !id) {
+    // ERROR PAGE -----
     return <Error />;
   } else {
     return (
       <div className="homepage">
-        <Liens />
+        <Header />
         <div className="dashboard">
-          <Header userInfos={userInfos} />
+          <UserInfosHeader userInfos={userInfos} />
           <div className="data-container">
+            {/* USER INFOS GRAPH */}
             <div className="data-container_left">
               <div className="data-top">
                 <SimpleBarChartsGraph userActivity={userActivity} />
@@ -126,6 +137,7 @@ const Home = (dataApi) => {
             </div>
             <div className="data-container_right">
               <div className="data-right">
+                {/* USER INFOS CARDS */}
                 <AsideComponent
                   content={userKeyData.calorieCount}
                   icone={calorieIcon}
