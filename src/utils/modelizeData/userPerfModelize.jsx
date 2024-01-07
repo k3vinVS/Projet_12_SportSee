@@ -1,4 +1,5 @@
 export const dataPerformanceFormat = (array) =>
+  // FORMAT THE DATA BEFORE DISPLAY -----
   array.reverse().map((data) => {
     switch (data.kind) {
       case 1:
@@ -19,6 +20,7 @@ export const dataPerformanceFormat = (array) =>
   });
 
 export const dataAverageSession = (array) => {
+  // FORMAT THE DATA WITH 2 FICTITIOUS DAYS FOR EXTENDED CURVE BEFORE DISPLAY -----
   const dayBefore = { day: 0, sessionLength: 0 };
   const dayAfter = {
     day: 8,
