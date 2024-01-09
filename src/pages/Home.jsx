@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 // MOCKED DATA & API -----
-import { getUserData } from "../utils/hooks/index";
+import { getUserData, mockedData } from "../utils/dataService/index";
 
 // HEADER PAGE + HEADER INFOS USER -----
 import Header from "../components/Header";
@@ -28,7 +28,7 @@ import Error from "./Error";
 import "../styles/home.css";
 import "../styles/bottomComponent.css";
 
-const Home = (dataApi) => {
+const Home = () => {
   const { id } = useParams();
   const [userInfos, setUserInfos] = useState({});
   const [todayScore, setTodayScore] = useState();
@@ -37,25 +37,25 @@ const Home = (dataApi) => {
   const [userAverageSessions, setUserAverageSessions] = useState([]);
   const [userPerformance, setUserPerformance] = useState([]);
   const [error, setError] = useState(false);
+  const dataApi = false; // SWITCH API'S DATA TO MOCKED DATA -----
 
   useEffect(() => {
     async function getProfileData() {
       try {
         // MOCKED DATA & API'S USER INFOS -----
-        const userInfos = await getUserData(id, "");
+        // "dataApi = false" => MOCKED DATA & "dataApi = true" => API'S DATA -----
+        if (dataApi) {
+          const userInfos = await getUserData(id, "");
 
-        // USER ACTIVITY'S INFOS FROM API -----
-        const activity = await getUserData(id, "activity");
+          // USER ACTIVITY'S INFOS FROM API -----
+          const activity = await getUserData(id, "activity");
 
-        // USER AVERAGE_SESSIONS'S INFOS FROM API -----
-        const averageSessions = await getUserData(id, "average-sessions");
+          // USER AVERAGE_SESSIONS'S INFOS FROM API -----
+          const averageSessions = await getUserData(id, "average-sessions");
 
-        // USER PERFORMANCE'S INFOS FROM API -----
-        const performance = await getUserData(id, "performance");
-
-        // "!dataApi" => MOCKED DATA & "dataApi" => API'S DATA -----
-        if (!dataApi) {
-          // WHEN DATA IS FROM API ----------
+          // USER PERFORMANCE'S INFOS FROM API -----
+          const performance = await getUserData(id, "performance");
+          // // WHEN DATA IS FROM API ----------
           console.log("données API: ", userInfos);
 
           // USER_MAIN_DATA -----
@@ -72,24 +72,23 @@ const Home = (dataApi) => {
           // PERFORMANCE -----
           setUserPerformance(performance.data.data.data);
         } else {
-          // WHEN DATA IS MOCKED ----------
-          console.log("données mockées: ", userInfos);
+          const userMockedInfos = mockedData(id);
+          // // WHEN DATA IS MOCKED ----------
+          console.log("données mockées: ", userMockedInfos);
 
           // USER_MAIN_DATA -----
-          setUserInfos(userInfos.userInfos.userInfos);
-          setUserKeyData(userInfos.userInfos.keyData);
+          setUserInfos(userMockedInfos.userInfos.userInfos);
+          setUserKeyData(userMockedInfos.userInfos.keyData);
           setTodayScore(
-            userInfos.userInfos.todayScore || userInfos.userInfos.score
+            userMockedInfos.userInfos.todayScore ||
+              userMockedInfos.userInfos.score
           );
-
           // ACTIVITY -----
-          setUserActivity(userInfos.activity.sessions);
-
+          setUserActivity(userMockedInfos.activity.sessions);
           // AVERAGESESSIONS -----
-          setUserAverageSessions(userInfos.averageSessions.sessions);
-
+          setUserAverageSessions(userMockedInfos.averageSessions.sessions);
           // PERFORMANCE -----
-          setUserPerformance(userInfos.performance.data);
+          setUserPerformance(userMockedInfos.performance.data);
         }
       } catch (error) {
         console.log("ERROR: ", error);

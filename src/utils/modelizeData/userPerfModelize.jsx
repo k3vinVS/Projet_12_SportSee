@@ -56,3 +56,12 @@ export const dataAverageSession = (array) => {
   });
   return averageArray;
 };
+
+export const dataUnity = (content, description) => {
+  let contentFormat = [content].toLocaleString("en-US");
+  if (description === "Calories") {
+    return `${contentFormat}kCal`;
+  } else {
+    return `${contentFormat}g`;
+  }
+};
