@@ -37,14 +37,13 @@ const Home = () => {
   const [userAverageSessions, setUserAverageSessions] = useState([]);
   const [userPerformance, setUserPerformance] = useState([]);
   const [error, setError] = useState(false);
-  const dataApi = false; // SWITCH API'S DATA TO MOCKED DATA -----
+  const API = process.env.REACT_APP_API;
+  const href = window.location.port;
 
   useEffect(() => {
     async function getProfileData() {
       try {
-        // MOCKED DATA & API'S USER INFOS -----
-        // "dataApi = false" => MOCKED DATA & "dataApi = true" => API'S DATA -----
-        if (dataApi) {
+        if (API !== href) {
           const userInfos = await getUserData(id, "");
 
           // USER ACTIVITY'S INFOS FROM API -----
@@ -71,34 +70,37 @@ const Home = () => {
 
           // PERFORMANCE -----
           setUserPerformance(performance.data.data.data);
-        } else {
-          const userMockedInfos = mockedData(id);
-          // // WHEN DATA IS MOCKED ----------
-          console.log("données mockées: ", userMockedInfos);
-
-          // USER_MAIN_DATA -----
-          setUserInfos(userMockedInfos.userInfos.userInfos);
-          setUserKeyData(userMockedInfos.userInfos.keyData);
-          setTodayScore(
-            userMockedInfos.userInfos.todayScore ||
-              userMockedInfos.userInfos.score
-          );
-          // ACTIVITY -----
-          setUserActivity(userMockedInfos.activity.sessions);
-          // AVERAGESESSIONS -----
-          setUserAverageSessions(userMockedInfos.averageSessions.sessions);
-          // PERFORMANCE -----
-          setUserPerformance(userMockedInfos.performance.data);
+        }
+        if (!getUserData) {
+          console.log("MockedData");
         }
       } catch (error) {
+        // IF DATA API DOESN'T WORK  -----
         console.log("ERROR: ", error);
         setError(true);
+        // MOCKED DATA -----
+        const userMockedInfos = mockedData(id, "");
+
+        console.log("données mockées: ", userMockedInfos);
+        // USER_MAIN_DATA -----
+        setUserInfos(userMockedInfos.userInfos.userInfos);
+        setUserKeyData(userMockedInfos.userInfos.keyData);
+        setTodayScore(
+          userMockedInfos.userInfos.todayScore ||
+            userMockedInfos.userInfos.score
+        );
+        // ACTIVITY -----
+        setUserActivity(userMockedInfos.activity.sessions);
+        // AVERAGESESSIONS -----
+        setUserAverageSessions(userMockedInfos.averageSessions.sessions);
+        // PERFORMANCE -----
+        setUserPerformance(userMockedInfos.performance.data);
       }
     }
     getProfileData();
-  }, [id, dataApi]);
+  }, [id, API, href]);
 
-  if (setError === true || error || !id) {
+  if (setError === true || !id || (error && !mockedData)) {
     // ERROR PAGE -----
     return <Error />;
   } else {

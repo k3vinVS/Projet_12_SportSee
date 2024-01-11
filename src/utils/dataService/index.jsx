@@ -2,6 +2,7 @@
 import axios from "axios";
 import data from "../../mocks/data";
 
+// MOCKED DATA -----
 export const mockedData = (id) => {
   // USER PRINCIPAL INFOS -----
   const userInfos = data.USER_MAIN_DATA.find((user) => user.id == id);
@@ -20,6 +21,7 @@ export const mockedData = (id) => {
   return { id, userInfos, activity, averageSessions, performance };
 };
 
+// DATA API -----
 export const getUserData = (id, endpoint) => {
   return axios.get(`http://localhost:3000/user/${id}/${endpoint}`);
 };
