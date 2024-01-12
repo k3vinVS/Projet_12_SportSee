@@ -46,32 +46,28 @@ const Home = () => {
   useEffect(() => {
     async function getProfileData() {
       try {
-        // // WHEN DATA IS FROM API ----------
+        // DATA ----------
         const userInfos = await getUserData(id, "");
 
         // USER ACTIVITY'S INFOS FROM API -----
         const activity = await getUserData(id, "activity");
-
         // USER AVERAGE_SESSIONS'S INFOS FROM API -----
         const averageSessions = await getUserData(id, "average-sessions");
-
         // USER PERFORMANCE'S INFOS FROM API -----
         const performance = await getUserData(id, "performance");
 
         if (API_MODE) {
+          // API'S DATA -----
           console.log("données API: ", userInfos);
 
           // USER_MAIN_DATA -----
           setUserInfos(userInfos.data.data.userInfos);
           setUserKeyData(userInfos.data.data.keyData);
           setTodayScore(userInfos.data.data.todayScore);
-
           // ACTIVITY -----
           setUserActivity(activity.data.data.sessions);
-
           // AVERAGESESSIONS -----
           setUserAverageSessions(averageSessions.data.data.sessions);
-
           // PERFORMANCE -----
           setUserPerformance(performance.data.data.data);
         } else {

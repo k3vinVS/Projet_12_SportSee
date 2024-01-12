@@ -6,11 +6,12 @@ import data from "../../mocks/data";
 // DON'T FORGET TO SWITCH THE SAME VARIABLE IN THE COMPONENT "Home.jsx" -----
 const API_MODE = process.env.REACT_APP_MODE_API === "true";
 
-// DATA API -----
 export const getUserData = (id, endpoint) => {
   if (API_MODE) {
+    // DATA API -----
     return axios.get(`http://localhost:3000/user/${id}/${endpoint}`);
   } else {
+    // MOCKED DATA -----
     // USER PRINCIPAL INFOS -----
     const userInfos = data.USER_MAIN_DATA.find((user) => user.id == id);
 
