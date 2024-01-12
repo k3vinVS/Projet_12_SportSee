@@ -37,7 +37,7 @@ const Home = () => {
   const [userAverageSessions, setUserAverageSessions] = useState([]);
   const [userPerformance, setUserPerformance] = useState([]);
   const [error, setError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const API = process.env.REACT_APP_API;
   const href = window.location.port;
 
@@ -71,31 +71,31 @@ const Home = () => {
 
           // PERFORMANCE -----
           setUserPerformance(performance.data.data.data);
-        } else {
-          const userMockedInfos = mockedData(id, "");
-
-          console.log("données mockées: ", userMockedInfos);
-          // USER_MAIN_DATA -----
-          setUserInfos(userMockedInfos.userInfos.userInfos);
-          setUserKeyData(userMockedInfos.userInfos.keyData);
-          setTodayScore(
-            userMockedInfos.userInfos.todayScore ||
-              userMockedInfos.userInfos.score
-          );
-          // ACTIVITY -----
-          setUserActivity(userMockedInfos.activity.sessions);
-          // AVERAGESESSIONS -----
-          setUserAverageSessions(userMockedInfos.averageSessions.sessions);
-          // PERFORMANCE -----
-          setUserPerformance(userMockedInfos.performance.data);
         }
       } catch (error) {
         // IF DATA API DOESN'T WORK  -----
         console.log("ERROR: ", error);
         setError(true);
-        setIsLoading(true);
-        // MOCKED DATA -----
       }
+
+      setIsLoading(false);
+
+      // MOCKED DATA -----
+      const userMockedInfos = await mockedData(id, "");
+
+      console.log("données mockées: ", userMockedInfos);
+      // USER_MAIN_DATA -----
+      setUserInfos(userMockedInfos.userInfos.userInfos);
+      setUserKeyData(userMockedInfos.userInfos.keyData);
+      setTodayScore(
+        userMockedInfos.userInfos.todayScore || userMockedInfos.userInfos.score
+      );
+      // ACTIVITY -----
+      setUserActivity(userMockedInfos.activity.sessions);
+      // AVERAGESESSIONS -----
+      setUserAverageSessions(userMockedInfos.averageSessions.sessions);
+      // PERFORMANCE -----
+      setUserPerformance(userMockedInfos.performance.data);
     }
     getProfileData();
   }, [id, API, href]);
@@ -106,14 +106,14 @@ const Home = () => {
   } else {
     return (
       <>
-        {isLoading ? (
-          <div className="loader-wrapper">
-            <div className="loader"></div>
-            <p className="loading">Loading ...</p>
-          </div>
-        ) : (
-          <div className="homepage">
-            <Header />
+        <div className="homepage">
+          <Header />
+          {isLoading ? (
+            <div className="loader-wrapper">
+              <div className="loader"></div>
+              <p className="loading">Loading ...</p>
+            </div>
+          ) : (
             <div className="dashboard">
               <UserInfosHeader userInfos={userInfos} />
               <div className="data-container">
@@ -172,8 +172,8 @@ const Home = () => {
                 </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </>
     );
   }
