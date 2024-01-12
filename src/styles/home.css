@@ -61,3 +61,38 @@
   justify-content: space-between;
   gap: 1.88rem;
 }
+
+/* ---------- LOADER ---------- */
+.loader-wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  height: 10rem;
+  width: 10rem;
+  border: 6px solid #e6000080;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: rotate 1s infinite linear;
+}
+
+.loading {
+  margin-top: 2rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #e6000080;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

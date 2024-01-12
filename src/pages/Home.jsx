@@ -37,6 +37,7 @@ const Home = () => {
   const [userAverageSessions, setUserAverageSessions] = useState([]);
   const [userPerformance, setUserPerformance] = useState([]);
   const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const API = process.env.REACT_APP_API;
   const href = window.location.port;
 
@@ -70,31 +71,30 @@ const Home = () => {
 
           // PERFORMANCE -----
           setUserPerformance(performance.data.data.data);
-        }
-        if (!getUserData) {
-          console.log("MockedData");
+        } else {
+          const userMockedInfos = mockedData(id, "");
+
+          console.log("données mockées: ", userMockedInfos);
+          // USER_MAIN_DATA -----
+          setUserInfos(userMockedInfos.userInfos.userInfos);
+          setUserKeyData(userMockedInfos.userInfos.keyData);
+          setTodayScore(
+            userMockedInfos.userInfos.todayScore ||
+              userMockedInfos.userInfos.score
+          );
+          // ACTIVITY -----
+          setUserActivity(userMockedInfos.activity.sessions);
+          // AVERAGESESSIONS -----
+          setUserAverageSessions(userMockedInfos.averageSessions.sessions);
+          // PERFORMANCE -----
+          setUserPerformance(userMockedInfos.performance.data);
         }
       } catch (error) {
         // IF DATA API DOESN'T WORK  -----
         console.log("ERROR: ", error);
         setError(true);
+        setIsLoading(true);
         // MOCKED DATA -----
-        const userMockedInfos = mockedData(id, "");
-
-        console.log("données mockées: ", userMockedInfos);
-        // USER_MAIN_DATA -----
-        setUserInfos(userMockedInfos.userInfos.userInfos);
-        setUserKeyData(userMockedInfos.userInfos.keyData);
-        setTodayScore(
-          userMockedInfos.userInfos.todayScore ||
-            userMockedInfos.userInfos.score
-        );
-        // ACTIVITY -----
-        setUserActivity(userMockedInfos.activity.sessions);
-        // AVERAGESESSIONS -----
-        setUserAverageSessions(userMockedInfos.averageSessions.sessions);
-        // PERFORMANCE -----
-        setUserPerformance(userMockedInfos.performance.data);
       }
     }
     getProfileData();
@@ -105,65 +105,76 @@ const Home = () => {
     return <Error />;
   } else {
     return (
-      <div className="homepage">
-        <Header />
-        <div className="dashboard">
-          <UserInfosHeader userInfos={userInfos} />
-          <div className="data-container">
-            {/* USER INFOS GRAPH */}
-            <div className="data-container_left">
-              <div className="data-top">
-                <SimpleBarChartsGraph userActivity={userActivity} />
-              </div>
-              <div className="data-bottom">
-                <div
-                  className="bottomComponent-container"
-                  style={{ backgroundColor: "red" }}
-                >
-                  <LineChartsGraph userAverageSessions={userAverageSessions} />
+      <>
+        {isLoading ? (
+          <div className="loader-wrapper">
+            <div className="loader"></div>
+            <p className="loading">Loading ...</p>
+          </div>
+        ) : (
+          <div className="homepage">
+            <Header />
+            <div className="dashboard">
+              <UserInfosHeader userInfos={userInfos} />
+              <div className="data-container">
+                {/* USER INFOS GRAPH */}
+                <div className="data-container_left">
+                  <div className="data-top">
+                    <SimpleBarChartsGraph userActivity={userActivity} />
+                  </div>
+                  <div className="data-bottom">
+                    <div
+                      className="bottomComponent-container"
+                      style={{ backgroundColor: "red" }}
+                    >
+                      <LineChartsGraph
+                        userAverageSessions={userAverageSessions}
+                      />
+                    </div>
+                    <div
+                      className="bottomComponent-container"
+                      style={{ backgroundColor: "#282D30" }}
+                    >
+                      <RadarChartsGraph userPerformance={userPerformance} />
+                    </div>
+                    <div
+                      className="bottomComponent-container"
+                      style={{ backgroundColor: "#FBFBFB" }}
+                    >
+                      <RadialBarChartsGraph todayScore={todayScore} />
+                    </div>
+                  </div>
                 </div>
-                <div
-                  className="bottomComponent-container"
-                  style={{ backgroundColor: "#282D30" }}
-                >
-                  <RadarChartsGraph userPerformance={userPerformance} />
+                <div className="data-container_right">
+                  <div className="data-right">
+                    {/* USER INFOS CARDS */}
+                    <AsideComponent
+                      content={userKeyData.calorieCount}
+                      icone={calorieIcon}
+                      description={"Calories"}
+                    />
+                    <AsideComponent
+                      content={userKeyData.proteinCount}
+                      icone={proteinIcon}
+                      description={"Proteines"}
+                    />
+                    <AsideComponent
+                      content={userKeyData.carbohydrateCount}
+                      icone={carbsIcon}
+                      description={"Glucides"}
+                    />
+                    <AsideComponent
+                      content={userKeyData.lipidCount}
+                      icone={fatIcon}
+                      description={"Lipides"}
+                    />
+                  </div>
                 </div>
-                <div
-                  className="bottomComponent-container"
-                  style={{ backgroundColor: "#FBFBFB" }}
-                >
-                  <RadialBarChartsGraph todayScore={todayScore} />
-                </div>
-              </div>
-            </div>
-            <div className="data-container_right">
-              <div className="data-right">
-                {/* USER INFOS CARDS */}
-                <AsideComponent
-                  content={userKeyData.calorieCount}
-                  icone={calorieIcon}
-                  description={"Calories"}
-                />
-                <AsideComponent
-                  content={userKeyData.proteinCount}
-                  icone={proteinIcon}
-                  description={"Proteines"}
-                />
-                <AsideComponent
-                  content={userKeyData.carbohydrateCount}
-                  icone={carbsIcon}
-                  description={"Glucides"}
-                />
-                <AsideComponent
-                  content={userKeyData.lipidCount}
-                  icone={fatIcon}
-                  description={"Lipides"}
-                />
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        )}
+      </>
     );
   }
 };
