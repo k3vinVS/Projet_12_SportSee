@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+// import React, { useEffect, useState } from "react";
+// import { useParams } from "react-router";
+import React from "react";
 
 // MOCKED DATA & API -----
-import { getUserData } from "../utils/dataService/index";
+import { useFetch } from "../utils/dataService/index";
 
 // HEADER PAGE + HEADER INFOS USER -----
 import Header from "../components/Header";
@@ -29,75 +30,20 @@ import "../styles/home.css";
 import "../styles/bottomComponent.css";
 
 const Home = () => {
-  const { id } = useParams();
-  const [userInfos, setUserInfos] = useState({});
-  const [todayScore, setTodayScore] = useState();
-  const [userKeyData, setUserKeyData] = useState({});
-  const [userActivity, setUserActivity] = useState([]);
-  const [userAverageSessions, setUserAverageSessions] = useState([]);
-  const [userPerformance, setUserPerformance] = useState([]);
-  const [error, setError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const {
+    id,
+    userInfos,
+    userTodayScore,
+    userKeyData,
+    userActivity,
+    userAverageSessions,
+    userPerformance,
+    isLoading,
+    error,
+  } = useFetch();
+  // console.log(userInfos);
 
-  // FOR THE API'S DATA, THE VARIABLE MUST BE "true" -----
-  // DON'T FORGET TO SWITCH THE SAME VARIABLE IN THE FILE "index.js" in "dataService" -----
-  const API_MODE = process.env.REACT_APP_MODE_API === "true";
-
-  useEffect(() => {
-    async function getProfileData() {
-      try {
-        // DATA ----------
-        const userInfos = await getUserData(id, "");
-
-        // USER ACTIVITY'S INFOS FROM API -----
-        const activity = await getUserData(id, "activity");
-        // USER AVERAGE_SESSIONS'S INFOS FROM API -----
-        const averageSessions = await getUserData(id, "average-sessions");
-        // USER PERFORMANCE'S INFOS FROM API -----
-        const performance = await getUserData(id, "performance");
-
-        if (API_MODE) {
-          // API'S DATA -----
-          console.log("données API: ", userInfos);
-
-          // USER_MAIN_DATA -----
-          setUserInfos(userInfos.data.data.userInfos);
-          setUserKeyData(userInfos.data.data.keyData);
-          setTodayScore(userInfos.data.data.todayScore);
-          // ACTIVITY -----
-          setUserActivity(activity.data.data.sessions);
-          // AVERAGESESSIONS -----
-          setUserAverageSessions(averageSessions.data.data.sessions);
-          // PERFORMANCE -----
-          setUserPerformance(performance.data.data.data);
-        } else {
-          // MOCKED DATA -----
-          console.log("données mockées: ", userInfos);
-
-          // USER_MAIN_DATA -----
-          setUserInfos(userInfos.userInfos.userInfos);
-          setUserKeyData(userInfos.userInfos.keyData);
-          setTodayScore(
-            userInfos.userInfos.todayScore || userInfos.userInfos.score
-          );
-          // ACTIVITY -----
-          setUserActivity(userInfos.activity.sessions);
-          // AVERAGESESSIONS -----
-          setUserAverageSessions(userInfos.averageSessions.sessions);
-          // PERFORMANCE -----
-          setUserPerformance(userInfos.performance.data);
-        }
-      } catch (error) {
-        // IF DATA API DOESN'T WORK  -----
-        console.log("ERROR: ", error);
-        setError(true);
-      }
-      setIsLoading(false);
-    }
-    getProfileData();
-  }, [id, API_MODE]);
-
-  if (setError === true || !id || error) {
+  if (!id || error) {
     // ERROR PAGE -----
     return <Error />;
   } else {
@@ -138,7 +84,7 @@ const Home = () => {
                       className="bottomComponent-container"
                       style={{ backgroundColor: "#FBFBFB" }}
                     >
-                      <RadialBarChartsGraph todayScore={todayScore} />
+                      <RadialBarChartsGraph todayScore={userTodayScore} />
                     </div>
                   </div>
                 </div>
@@ -177,3 +123,72 @@ const Home = () => {
 };
 
 export default Home;
+
+// const { id } = useParams();
+// const [userInfos, setUserInfos] = useState({});
+// const [todayScore, setTodayScore] = useState();
+// const [userKeyData, setUserKeyData] = useState({});
+// const [userActivity, setUserActivity] = useState([]);
+// const [userAverageSessions, setUserAverageSessions] = useState([]);
+// const [userPerformance, setUserPerformance] = useState([]);
+// const [error, setError] = useState(false);
+// const [isLoading, setIsLoading] = useState(true);
+
+// // FOR THE API'S DATA, THE VARIABLE MUST BE "true" -----
+// // DON'T FORGET TO SWITCH THE SAME VARIABLE IN THE FILE "index.js" in "dataService" -----
+// const API_MODE = process.env.REACT_APP_MODE_API === "true";
+
+// useEffect(() => {
+//   async function getProfileData() {
+//     try {
+//       const userInfos = await getUserData(id, "");
+//       console.log(userInfos);
+
+//       // USER ACTIVITY'S INFOS FROM API -----
+//       const activity = await getUserData(id, "activity");
+//       // USER AVERAGE_SESSIONS'S INFOS FROM API -----
+//       const averageSessions = await getUserData(id, "average-sessions");
+//       // USER PERFORMANCE'S INFOS FROM API -----
+//       const performance = await getUserData(id, "performance");
+//       // DATA ----------
+
+//       if (API_MODE) {
+//         // API'S DATA -----
+//         console.log("données API: ", userInfos);
+
+//         // USER_MAIN_DATA -----
+//         setUserInfos(userInfos.data.data.userInfos);
+//         setUserKeyData(userInfos.data.data.keyData);
+//         setTodayScore(userInfos.data.data.todayScore || userInfos.data.data.score);
+//         // ACTIVITY -----
+//         setUserActivity(activity.data.data.sessions);
+//         // AVERAGESESSIONS -----
+//         setUserAverageSessions(averageSessions.data.data.sessions);
+//         // PERFORMANCE -----
+//         setUserPerformance(performance.data.data.data);
+//       } else {
+//         // MOCKED DATA -----
+//         console.log("données mockées: ", userInfos);
+
+//         // USER_MAIN_DATA -----
+//         setUserInfos(userInfos.userInfos.userInfos);
+//         setUserKeyData(userInfos.userInfos.keyData);
+//         setTodayScore(
+//           userInfos.userInfos.todayScore || userInfos.userInfos.score
+//         );
+//         // ACTIVITY -----
+//         setUserActivity(userInfos.activity.sessions);
+//         // AVERAGESESSIONS -----
+//         setUserAverageSessions(userInfos.averageSessions.sessions);
+//         // PERFORMANCE -----
+//         setUserPerformance(userInfos.performance.data);
+//       }
+//     } catch (error) {
+//       // IF DATA API DOESN'T WORK  -----
+//       console.log("ERROR: ", error);
+//       setError(true);
+//     }
+//     setIsLoading(false);
+//   }
+//   getProfileData();
+// }, [id, API_MODE]);
