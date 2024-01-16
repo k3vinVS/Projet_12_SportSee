@@ -112,22 +112,3 @@ export function useFetch() {
   };
 }
 
-// export const getUserData = (id, endpoint) => {
-//   if (API_MODE) {
-//     // DATA API -----
-//     return axios.get(`http://localhost:3000/user/${id}/${endpoint}`);
-//   } else {
-//     // MOCKED DATA -----
-//     // USER PRINCIPAL INFOS -----
-//     const userInfos = data.USER_MAIN_DATA.find((user) => user.id == id);
-//     // USER ACTIVITY'S INFOS FOR GRAPH -----
-//     const activity = data.USER_ACTIVITY.find((user) => user.userId == id);
-//     // USER AVERAGE_SESSIONS'S INFOS FOR GRAPH -----
-//     const averageSessions = data.USER_AVERAGE_SESSIONS.find(
-//       (user) => user.userId == id
-//     );
-//     // USER PERFORMANCE'S INFOS FOR GRAPH -----
-//     const performance = data.USER_PERFORMANCE.find((user) => user.userId == id);
-//     return { id, userInfos, activity, averageSessions, performance };
-//   }
-// };
