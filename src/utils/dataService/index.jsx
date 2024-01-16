@@ -50,15 +50,14 @@ export function useFetch() {
             // console.log("serveur connecté");
             setIsConnected(true);
           } else {
-            // console.log("serveur non connecté");
+            console.log("serveur non connecté");
             setIsConnected(false);
           }
         })
         .catch(() => console.log("API'S DATA ERROR"));
 
       if (ENV_MODE === "MOCK" && !isConnected) {
-        console.log("MOCKED DATA");
-        // console.log(userInfosMock);
+        console.log("serveur non connecté");
         setUserInfos(userInfosMock.userInfos);
         setUserKeyData(userInfosMock.keyData);
         setUserTodayScore(userInfosMock.todayScore || userInfosMock.score);
@@ -111,4 +110,3 @@ export function useFetch() {
     error,
   };
 }
-
