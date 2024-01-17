@@ -47,7 +47,7 @@ export function useFetch() {
       fetch(`http://localhost:3000/user/${id}`)
         .then((response) => {
           if (response.ok) {
-            // console.log("serveur connecté");
+            console.log("serveur connecté");
             setIsConnected(true);
           } else {
             console.log("serveur non connecté");
@@ -65,7 +65,7 @@ export function useFetch() {
         setUserAverageSessions(userAverageSessionsMock.sessions);
         setUserPerformance(userPerformanceMock.data);
       } else if (isConnected) {
-        console.log("API'S SERVER");
+        console.log("API'S DATA SERVER");
         try {
           // ---------- API'S DATA ----------
           const userInfos = await axios.get(
@@ -93,6 +93,15 @@ export function useFetch() {
           setError(true);
         }
       }
+
+      // IF ENVIRONMENT VARIABLE IS "FALSE" AND API SERVER IS NOT CONNECTED, ERROR PAGE IS APPEAR -----
+      if (ENV_MODE !== "MOCK" && !isConnected) {
+        setError(true);
+      } else {
+        setError(false);
+      }
+
+      // END OF THE LOADER -----
       setIsLoading(false);
     }
     fetchData();
